@@ -10,6 +10,8 @@ body{
     border-radius: 25px;
     width: 200px;
     height: 40px;
+    font-size: large;
+    font-weight: 600;
 }
 .login input{
     border-radius: 25px;
