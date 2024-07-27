@@ -1,0 +1,21 @@
+body{
+    background-color: #1B1925;
+    color: azure;
+}
+.img img{
+    width: 150px;
+    margin: 50px 0 30px 0;
+}
+.btn1{
+    border-radius: 25px;
+    width: 200px;
+    height: 40px;
+}
+.login input{
+    border-radius: 25px;
+    height: 40px;
+}
+.login a{
+    color: azure;
+    text-decoration: none;
+}
