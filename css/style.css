@@ -69,9 +69,7 @@ body{
 .proceedBtn{
     border: none;
     background-color: #0dff00;
-    margin-left: 80px;
 }
 .proceedBtn:hover{
     background-color: #0bd800;
 }
-
