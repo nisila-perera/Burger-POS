@@ -1,29 +1,19 @@
 // Cashier Login
-
 const cashier_users = [{ username: "nimal", name: "Nimal", password: "1234" }];
 
 function loginC() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  let cUser;
-  for (let i = 0; i < cashier_users.length; i++) {
-    if (
-      cashier_users[i].username === username &&
-      cashier_users[i].password === password
-    ) {
-      cUser = cashier_users[i];
-      break;
-    }
-  }
+  let cUser = cashier_users.find(user => user.username === username && user.password === password);
 
   if (cUser) {
+    localStorage.setItem('loggedInCashier', JSON.stringify(cUser));
     window.location.href = `cashier_home.html`;
   } else {
     alert("Login failed. Please check your username and password.");
   }
 }
-
 // Admin Login
 
 const admin_users = [{ username: "saman", name: "Saman", password: "1234" }];
@@ -126,15 +116,21 @@ function searchCustomerByUsername(username) {
 
 // Proceed Order Button
 
-let selectedCustomer = null;
+//let selectedCustomer = null;
 
 function proceedOrder(username) {
-  selectedCustomer = searchCustomerByUsername(username);
-  window.location.href = `cashier_order.html`;
-  console.log(selectedCustomer.username);
+  const selectedCustomer = searchCustomerByUsername(username);
+  if (selectedCustomer) {
+    // Store the selected customer in localStorage
+    localStorage.setItem('selectedCustomer', JSON.stringify(selectedCustomer));
+    window.location.href = `cashier_order.html`;
+  } else {
+    console.error('Customer not found');
+  }
 }
 
 // Sample items array
+
 const items = [
   { img: "1.jpg", name: "Cheese Burger", price: 500 },
   { img: "2.jpg", name: "Veggie Burger", price: 450 },
@@ -149,9 +145,10 @@ const items = [
 
 
 // Function to render items
+
 function renderItems(filteredItems) {
     const itemsContainer = document.getElementById('items');
-    itemsContainer.innerHTML = '';  // Clear existing items
+    itemsContainer.innerHTML = '';
 
     for (let i = 0; i < filteredItems.length; i++) {
         const itemsDiv = document.createElement('div');
@@ -175,9 +172,11 @@ function renderItems(filteredItems) {
 }
 
 // Initial render
+
 renderItems(items);
 
 // Event listener for search bar
+
 document.getElementById('search-bar').addEventListener('input', function(event) {
     const query = event.target.value.toLowerCase();
     const filteredItems = items.filter(item => item.name.toLowerCase().includes(query));
@@ -185,6 +184,94 @@ document.getElementById('search-bar').addEventListener('input', function(event) 
 });
 
 // Add To Order function
+
 function addToOrder(name, price) {
-    console.log("Item Added:", name, price);
+  const orderItems = document.getElementById('orderItems');
+  const totalElement = document.getElementById('orderTotal');
+  
+  // Create a new list item for the order
+  const listItem = document.createElement('li');
+  listItem.innerHTML = `${name} <span class="float-end">1 LKR ${price}</span>`;
+  
+  // Add the new item to the list
+  orderItems.appendChild(listItem);
+  
+  // Update the total
+  const currentTotal = parseInt(totalElement.textContent.replace('LKR ', '')) || 0;
+  const newTotal = currentTotal + price;
+  totalElement.textContent = `LKR ${newTotal}`;
 }
+
+// Load customer
+
+function loadSelectedCustomer() {
+  const storedCustomer = localStorage.getItem('selectedCustomer');
+  if (storedCustomer) {
+    const customer = JSON.parse(storedCustomer);
+    const customerNameElement = document.getElementById('customerName');
+    if (customerNameElement) {
+      customerNameElement.textContent = customer.name;
+    }
+    localStorage.removeItem('selectedCustomer');
+  }
+}
+
+// call the function at initial load
+
+if (window.location.pathname.includes('cashier_order.html')) {
+  window.addEventListener('DOMContentLoaded', loadSelectedCustomer);
+}
+
+if (window.location.pathname.includes('cashier_home.html') || window.location.pathname.includes('cashier_order.html')) {
+  window.addEventListener('DOMContentLoaded', loadCashierName);
+}
+
+// Load cashier
+
+function loadCashierName() {
+  const storedCashier = localStorage.getItem('loggedInCashier');
+  if (storedCashier) {
+    const cashier = JSON.parse(storedCashier);
+    const cashierNameElement = document.getElementById('cashier');
+    if (cashierNameElement) {
+      cashierNameElement.textContent = cashier.name;
+    }
+  }
+}
+
+let currentOrderId = 1;
+
+function generateOrderId() {
+    return currentOrderId++;
+}
+
+function newOrder() {
+    const orderId = generateOrderId();
+    document.getElementById('orderId').textContent = orderId.toString().padStart(4, '0');
+    document.getElementById('orderItems').innerHTML = '';
+    document.getElementById('orderTotal').textContent = 'LKR 0';
+    localStorage.setItem('currentOrderId', currentOrderId);
+}
+
+function loadOrderId() {
+    const storedOrderId = localStorage.getItem('currentOrderId');
+    if (storedOrderId) {
+        currentOrderId = parseInt(storedOrderId);
+    }
+    newOrder();
+}
+
+if (window.location.pathname.includes('cashier_order.html')) {
+  window.addEventListener('DOMContentLoaded', () => {
+      loadCashierName();
+      loadSelectedCustomer();
+      loadOrderId();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const newOrderBtn = document.querySelector('.navbar-brand');
+  if (newOrderBtn) {
+      newOrderBtn.addEventListener('click', newOrder);
+  }
+});
