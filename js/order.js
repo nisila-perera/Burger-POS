@@ -46,11 +46,45 @@ function printBill() {
       <head>
         <title>Bill</title>
         <style>
-          body { font-family: Arial, sans-serif; }
-          .bill-header { text-align: center; margin-bottom: 20px; }
-          .bill-details { margin-bottom: 20px; }
-          .bill-items { margin-bottom: 20px; }
-          .bill-total { text-align: right; font-weight: bold; }
+          body { 
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px;
+          }
+          .bill-header { 
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+          }
+          .bill-details { 
+            margin-bottom: 20px;
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+          }
+          .bill-items { 
+            margin-bottom: 20px;
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+          }
+          .bill-total { 
+            text-align: right;
+            font-weight: bold;
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+          }
+          ul {
+            list-style-type: none;
+            padding: 0;
+          }
+          li {
+            margin-bottom: 10px;
+          }
         </style>
       </head>
       <body>

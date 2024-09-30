@@ -2,28 +2,24 @@ const customers = [
   {
     username: "siripala",
     name: "Siripala",
-    password: "1234",
     mobile: "0760702896",
     address: "Moratuwa",
   },
   {
     username: "kapila",
     name: "Kapila",
-    password: "1234",
     mobile: "0777705872",
     address: "Katubadda",
   },
   {
     username: "nimala",
     name: "Nimala",
-    password: "1234",
     mobile: "0774245872",
     address: "Galle",
   },
   {
     username: "sumanapala",
     name: "Sumanapala",
-    password: "1234",
     mobile: "0753602896",
     address: "Panadura",
   },
@@ -34,6 +30,10 @@ function searchCustomerFromMobile() {
   const resultsContainer = document.getElementById("searchResults");
   resultsContainer.innerHTML = "";
 
+  if (searchInput.length === 0) {
+    return;
+  }
+
   const matchingCustomers = customers.filter((customer) =>
     customer.mobile.includes(searchInput)
   );
@@ -41,9 +41,9 @@ function searchCustomerFromMobile() {
   if (matchingCustomers.length === 0) {
     resultsContainer.innerHTML = `
         <p>No Customer Found, Want to add customer with ${searchInput} mobile number?</p>
-        <a href="add_customer.html"><button class="btn btn-primary btn-sm btn1 addBtn ">Add New Customer</button></a>
+        <button class="btn btn-primary btn-sm btn1 addBtn" onclick="redirectToAddCustomer('${searchInput}')">Add New Customer</button>
         `;
-  } else {
+  }  else {
     matchingCustomers.forEach((customer, index) => {
       const customerDiv = document.createElement("div");
       customerDiv.className =
@@ -55,6 +55,11 @@ function searchCustomerFromMobile() {
       resultsContainer.appendChild(customerDiv);
     });
   }
+}
+
+function redirectToAddCustomer(mobileNumber) {
+  localStorage.setItem('newCustomerMobile', mobileNumber);
+  window.location.href = 'add_customer.html';
 }
 
 function searchCustomerByUsername(username) {
@@ -73,4 +78,4 @@ function loadSelectedCustomer() {
   }
 }
 
-export { searchCustomerFromMobile, searchCustomerByUsername, loadSelectedCustomer };
+export { searchCustomerFromMobile, searchCustomerByUsername, loadSelectedCustomer, redirectToAddCustomer, customers };

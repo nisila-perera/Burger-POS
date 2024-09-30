@@ -73,3 +73,6 @@ body{
 .proceedBtn:hover{
     background-color: #0bd800;
 }
+.search-bar input::placeholder{
+    text-align: center;
+}

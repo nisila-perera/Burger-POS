@@ -1,3 +1,5 @@
+import { searchCustomerByUsername } from './customers.js';
+
 function proceedOrder(username) {
   const selectedCustomer = searchCustomerByUsername(username);
   if (selectedCustomer) {
