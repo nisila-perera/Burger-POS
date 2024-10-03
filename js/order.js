@@ -62,8 +62,32 @@ export function printBill() {
   printWindow.document.write('</body></html>');
   
   printWindow.document.close();
-  
   printWindow.print();
+
+  saveOrderToHistory();
+  newOrder();
+}
+
+export function saveOrderToHistory() {
+  const orderId = document.getElementById('orderId').textContent;
+  const customerName = document.getElementById('customerName').textContent;
+  const orderItems = Array.from(document.getElementById('orderItems').children).map(item => {
+      const [name, price] = item.textContent.split('LKR ');
+      return { name: name.trim(), price: parseInt(price) };
+  });
+  const total = parseInt(document.getElementById('orderTotal').textContent.replace('LKR ', ''));
+
+  const order = {
+      orderId,
+      customerName,
+      items: orderItems,
+      total,
+      date: new Date().toISOString()
+  };
+
+  const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+  orderHistory.push(order);
+  localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
 }
 
 window.newOrder = newOrder;

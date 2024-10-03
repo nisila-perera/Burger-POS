@@ -22,6 +22,7 @@ export function loginA() {
   const aUser = admin_users.find(user => user.username === username && user.password === password);
 
   if (aUser) {
+    localStorage.setItem('loggedInAdmin', JSON.stringify(aUser));
     window.location.href = 'admin_home.html';
   } else {
     alert("Login failed. Please check your username and password.");
@@ -35,6 +36,17 @@ export function loadCashierName() {
     const cashierNameElement = document.getElementById('cashier');
     if (cashierNameElement) {
       cashierNameElement.textContent = cashier.name;
+    }
+  }
+}
+
+export function loadAdminName() {
+  const storedAdmin = localStorage.getItem('loggedInAdmin');
+  if (storedAdmin) {
+    const admin = JSON.parse(storedAdmin);
+    const adminNameElement = document.getElementById('admin');
+    if (adminNameElement) {
+      adminNameElement.textContent = admin.name;
     }
   }
 }

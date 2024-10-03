@@ -42,7 +42,7 @@ function getCustomerData() {
 
 function addCustomerToArray(newCustomer) {
     customers.push(newCustomer);
-    console.log('Updated customers array:', customers);
+    console.log(customers);
 }
 
 document.addEventListener('DOMContentLoaded', setupAddCustomerForm);

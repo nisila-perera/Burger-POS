@@ -1,9 +1,10 @@
 // main.js
-import { loginC, loginA, loadCashierName } from './auth.js';
+import { loginC, loginA, loadCashierName, loadAdminName } from './auth.js';
 import { searchCustomerFromMobile, loadSelectedCustomer, redirectToAddCustomer } from './customers.js';
 import { setupItemSearch } from './items.js';
 import { newOrder, loadOrderId, printBill } from './order.js';
 import { proceedOrder } from './utils.js';
+import { initializeOrderHistory } from './order_history.js';
 
 function initializePage() {
   const path = window.location.pathname;
@@ -28,6 +29,11 @@ function initializePage() {
     setupItemSearch();
     document.querySelector('.navbar-brand').addEventListener('click', newOrder);
     document.getElementById('printBillBtn').addEventListener('click', printBill);
+  } else if (path.includes('admin_home.html')) {
+    loadAdminName();
+  } else if (path.includes('order_history.html')) {
+    loadCashierName();
+    initializeOrderHistory();
   }
 }
 

@@ -63,6 +63,7 @@ body{
     z-index: 1000;
     padding-bottom: 15px;
     margin-top: 70px;
+    width: 100%;
 }
 .scrollable-results {
     flex-grow: 1;
@@ -93,10 +94,71 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.button-container .btn1 {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Adjust existing styles */
+.btn1, .proceedBtn {
+    border-radius: 25px;
+    height: 40px;
+    font-size: large;
+    font-weight: 600;
+}
+
+.fixed-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding-bottom: 15px;
+    margin-top: 70px;
+    width: 100%;
+}
+
+/* New styles for button layout */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
 }
 
 .button-container .btn1,
 .button-container .proceedBtn {
     margin-bottom: 10px;
+}
+
+#orderHistory .card {
+    background-color: #2a2836;
+    color: azure;
+    border: none;
+    margin-bottom: 20px;
+}
+
+#orderHistory .card-header {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+#orderHistory .card-body {
+    padding: 15px;
+}
+
+#orderHistory .card-text {
+    margin-bottom: 5px;
+}
+
+/* Add this new rule to ensure all text in the card is white */
+#orderHistory .card-text p {
+    color: white !important;
+}
+
+.card-text p{
+    color: white !important;
 }
