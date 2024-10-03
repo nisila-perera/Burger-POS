@@ -94,13 +94,20 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 40%;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto 0;
+}
+
+.button-container a {
+    width: 100%;
+    margin-bottom: 15px;
+    text-decoration: none;
 }
 
 .button-container .btn1 {
     width: 100%;
-    margin-bottom: 15px;
+    display: block;
 }
 
 /* Adjust existing styles */
@@ -109,6 +116,9 @@ body{
     height: 40px;
     font-size: large;
     font-weight: 600;
+    padding: 0 15px;
+    line-height: 40px;
+    text-align: center;
 }
 
 .fixed-header {

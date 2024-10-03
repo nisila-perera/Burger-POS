@@ -27,7 +27,6 @@ function initializePage() {
     loadSelectedCustomer();
     loadOrderId();
     setupItemSearch();
-    document.querySelector('.navbar-brand').addEventListener('click', newOrder);
     document.getElementById('printBillBtn').addEventListener('click', printBill);
   } else if (path.includes('admin_home.html')) {
     loadAdminName();

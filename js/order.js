@@ -65,7 +65,6 @@ export function printBill() {
   printWindow.print();
 
   saveOrderToHistory();
-  newOrder();
 }
 
 export function saveOrderToHistory() {
