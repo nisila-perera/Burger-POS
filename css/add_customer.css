@@ -1,0 +1,28 @@
+.customer-form{
+    margin-top: 80px;
+    margin-bottom: 30px;
+    padding-top: 30px;
+}
+
+.customer-form h2 {
+    margin-bottom: 30px;
+}
+
+.btn1 {
+    background-color: #1B1925;
+    color: azure;
+    border: none;
+}
+
+.btn1:hover {
+    background-color: #2c2a3a;
+    color: azure;
+}
+
+.proceedBtn {
+    background-color: #036ed3;
+}
+
+.proceedBtn:hover {
+    background-color: #248cee;
+}

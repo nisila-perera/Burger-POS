@@ -1,7 +1,7 @@
 import { customers } from './customers.js';
 import { proceedOrder } from './utils.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+function setupAddCustomerForm() {
     const mobileInput = document.getElementById('mobile');
     const storedMobile = localStorage.getItem('newCustomerMobile');
     if (storedMobile) {
@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addAndContinueBtn = document.getElementById('addAndContinue');
     addAndContinueBtn.addEventListener('click', handleAddAndContinue);
-});
+}
 
 function handleAddCustomer(event) {
     event.preventDefault();
     const newCustomer = getCustomerData();
     addCustomerToArray(newCustomer);
     alert('Customer added successfully!');
-    addCustomerForm.reset();
+    document.getElementById('addCustomerForm').reset();
 }
 
 function handleAddAndContinue(event) {
@@ -45,10 +45,4 @@ function addCustomerToArray(newCustomer) {
     console.log('Updated customers array:', customers);
 }
 
-function redirectToAddCustomer(mobileNumber) {
-    localStorage.setItem('newCustomerMobile', mobileNumber);
-    window.location.href = 'add_customer.html';
-  }
-  
-
-export{redirectToAddCustomer}
+document.addEventListener('DOMContentLoaded', setupAddCustomerForm);
